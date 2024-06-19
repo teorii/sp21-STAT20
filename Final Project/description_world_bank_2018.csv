@@ -1,0 +1,38 @@
+﻿Column Number,Column Name,Description
+1,country_name,Country Name
+2,country_code,Country Code
+3,adolescent_fertility,"Adolescent fertility rate of births per 1000 women, aged 15-19"
+4,GDP,Gross domestic product (GDP) in constant 2010 U.S. dollars
+5,electricity_access,Percentage of people with access to electricity
+6,age_dependency,Age dependency ratio (% of working-age population) is the ratio of dependents (people young than 15 or older than 64) as a proportion of dependents per 100 working-age population
+7,birds_threatened,"Number of birds species classified by the IUCN as endangered, vulnerable, rare, indeterminate, out of danger, or insufficiently known"
+8,crude_births,"Number of live births occurring during the year, per 1,000 population estimated at midyear"
+9,compulsory_education,Number of years that children are legally obligated to attend school
+10,start_up_cost,Cost of business start-up procedures (% of GNI per capita)
+11,crude_deaths,"Number of deaths occurring during the year, per 1,000 population estimated at midyear"
+12,credit,"Depth of credit information index, ranging from 0 to 8, measures rules affecting the scope, accessibility, and quality of credit information available through public or private credit registries.  The higher the value, the greater the availability of more credit information from either a public registry or private bureau to facilitate leading decisions."
+13,business_ease,"Distance to frontier score illustrates the distance of an economy to the ""frontier,"" which represents the best performance observed on each Doing Business topic across all economies and years included since 2005.  An economy's distance to frontier is indicated on a scale from 0 to 100, where 0 represents the lowest performance and 100 the frontier."
+14,fertility,Number of children that would be born to a woman if she were to live to the end of her childbearing years and bear children in accordance with age-specific fertility rates of the specified year 
+15,fish_threatened,"Number of fish species classified by the IUCN as endangered, vulnerable, rare, indeterminate, out of danger, or insufficiently known"
+16,telephone,"Number of of active number of analogue fixed telephone lines, voice-over-IP (VoIP) subscriptions, fixed wireless local loop (WLL) subscriptions, ISDN voice-channel equivalents and fixed public payphones"
+17,foreign_inflow,"Net inflows of direct investment equity flows in the reporting economy including the sum of equity capital, reinvestment of earnings, and other capital"
+18,foreign_outflow,"Net outflows of direct investment equity flows in the reporting economy including the sum of equity capital, reinvestment of earnings, and other capital"
+19,GDP_growth,Annual percentage growth rate of GDP at market prices based on constant local currency based on constant 2010 dollars in 2018
+20,measles_immunization,Percentage of children ages 12-23 months who received an adequate measles vaccination (after receiving one dose of vaccine) before 12 months or at any time before the survey
+21,labor,"Labor force total of people ages 15 and older who supply labor for the production of goods and services during a specified period.  This includes people that are currently employed and people who are unemployed but seeking work and first-time job-seekers. Notice, however, that unpaid workers, family workers, and students are omitted."
+22,land,Land area in square kilometers
+23,life_expectancy_female,"Life expectancy at birth, female (years)"
+24,life_expectancy_male,"Life expectancy at birth, male (years)"
+25,life_expectancy_total,"Life expectancy at birth, total (years)"
+26,mammals_threatened,"Number of mammal species classified by the IUCN as endangered, vulnerable, rare, indeterminate, out of danger, or insufficiently known"
+27,mobile_cell,Number of subscriptions to a public mobile telephone service that provide access to the PSTN using cellular technology
+28,infant_deaths,Number of infants dying before reaching one year of age
+29,pop_ann_growth,"Annual population growth rate for year t is the exponential rate of growth of midyear population from year  2017 to 2018, expressed as a percentage "
+30,female_pop_perc,Percentage of the population that is female
+31,male_pop_perc,Percentage of the population that is male
+32,pop_total,Population total
+33,private_cred,"Number of individuals or firms listed by a private credit bureau with current information on repayment history, unpaid debts, or credit outstanding as a percentage of the adult population"
+34,profit_tax,Amount of taxes on profits paid by the business as apercent of commercial profits
+35,parliament_women,Percentage of parliamentary seats in a single or lower chamber held by women
+36,sex_ratio,Sex ratio at birth refers to male births per female births
+37,legal_rights,This strength of legal rights index measures the degree to which collateral and bankruptcy laws protect the rights of borrowers and lenders and thus facilitate lending.  The index ranges from 0 to 12 with higher scores indicated that these laws are better designed to expand access to credit

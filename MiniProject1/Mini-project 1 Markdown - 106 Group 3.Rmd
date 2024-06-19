@@ -1,0 +1,125 @@
+---
+title: 'STAT20 Spring 2021: Mini-project 1'
+author: '106 Group 3: Seth Metcalf, Antwaine Sermons, Eman Nazir, Jaileen Perez, Roberto
+  Almanza, and Vanessa Qiu'
+output:
+  html_document:
+    df_print: paged
+  pdf_document: default
+  word_document: default
+---
+
+### Introduction
+
+*Due 3 March 2021, at 11 PM.*
+
+This is a group project. You will turn it in on bcourses. Only one submission per group is needed. As long as you are part of a project group (not a student group) you will get a grade. All the relevant files and data for the project are in a folder called Project 1 under Files on bcourses.
+
+The project consists of two parts, the first part consists of how to poorly display data, while the second part has to do with data on maternal mothers through the dataset babies.csv.
+```{r}
+# Important R Initialization
+library(dplyr)
+library(ggplot2)
+babies = read.csv("C:\\Users\\sethc\\Documents\\STAT20\\MiniProject1\\babies.csv")
+```
+
+
+# Part 1: How to Display Data Badly
+
+For this part of the project, you are expected to read the paper *How  to  Display  Data  Badly* by Howard Wainer.
+
+### 1.
+
+Discuss it as a group, and write a comment (about 100-400 words) on what you think of the paper and the author's rules. It will be graded using the same rubric as other writing assignments
+
+##### Comment:
+
+The author, Howard Wainer, displayed a significant role in the number of concentrated methods of data display that left our group in a state of curiosity throughout the article. E.R. Tuft “Improving Data Display” replicated vast amounts of information in data density index (DDI) which can be referred to as, “the number of numbers plotted per square inch.” 
+We have seen that we can display data badly either by not including them in Rule 1 or by hiding them by evidence of Rule 2. Simultaneously, omitting the context as well as quantitative data scale is the key of Ordinal Graphics by evidence of Rule 4. 
+The three rules for the accurate display of data are to compromise accuracy by ignoring visual metaphors as evidence of Rule 3, by only paying attention to the order of numbers and not its magnitude as evidence of Rule 4, or by showing data out of context as evidence of Rule 5. 
+Tufte’s measures of perceptual accuracy have been compromised by the display. Six more rules that fall under obscuring data, mentioned were to change the scale in mid-axis, emphasize the trivial, jiggle the baseline, order the chart by a characteristic unrelated to the data, label poorly, and include more dimensions or decimal places than are justified or needed. 
+The measure of the display is interlocking; the data density cannot be high if the graph is cluttered with chartjunk; the data-ink ratio grows with the amount of data displayed. Thus, making the rule for good display carefully examined enough to know what they have to say, and then let them say it with a minimum of adornment. 
+
+### 2. 
+
+Give an example of bad visualization of data that you have seen or read recently, and explain why you think the visualization is misleading or just confusing, using the rules presented in the paper. Please do **not** provide a link, but provide a picture of the data in your report and cite its source.
+
+##### Example:
+
+![Gun Violence in the United States by National Safety Council](https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/1999-_Gun-related_deaths_USA.png/1280px-1999-_Gun-related_deaths_USA.png){#id .class width=50% height=50%}
+
+This “Gun Violence in the United States” infographic by the National Safety Council is a prime example of a bad visualization of Data that Wainer presented in the article. This data represented a continuous line chart that is used to show discrete data, For one, it is a line chart that is meant to show continuity, but the data points are discrete –– they only have a certain number of values. In this scenario, the points appear to be marketing gun-related deaths for certain years.
+
+Tufts says, “the years are also an issue because they appear to be inclusive, which is confusing. How much time does each data point include.”, “This dataset would be better off as a bar chart. That way, each discrete value would correspond to a particular year.” There is information between points, so drawing a line from one data point to the next can be misleading. 
+
+Cc: National Safety Council (NSC) infographic
+
+# Part 2: Maternal Smoking and Infant Health
+
+*One of the US Surgeon General's health warnings placed on a side panel of cigarette packages reads: Smoking by pregnant women may result in fetal injury, premature birth, and low birthweight. In this lab, you will have the opportunity to compare the birthweights of babies born to smokers and nonsmokers in order to determine whether they corroborate on the Surgeon General's warning. The data provided here are part of the Child Health and Development Studies (CHDS) - a comprehensive investigation of all pregnancies that occurred between 1960 and 1967 among women in the Kaiser Foundation Health Plan in the San Francisco-East Bay area. This study is noted for its unexpected findings that ounce for ounce the babies of smokers did not have a higher death rate than the babies of nonsmokers...*
+
+15,000 people participated in the study, and the data here are a subset of the much larger study. The data consist of 1236 baby boys born during one year of the study, that lived at least 28 days, and who were single births (not part of a set of twins or triplets). The information available for each baby is the baby's birthweight, and whether or not the mother smoked during her pregnancy (smoked (value 1), did not smoke (value 0), or unknown (value 9))
+
+### Investigations:
+
+What is the difference in weight between babies born to mothers who smoked during pregnancy and those who did not? Is this difference important to the health of the baby?
+
+##### 1. Summarize numerically the two distributions of birth weight for babies born to comen who smoked during their pregnancy and for babies born to women who did not smoke during their pregnancy. That is, compute the mean and sd for each group of babies. Also report the lightest and heaviest babies in each group.
+
+**Bodyweight of non-smoking mothered babies:**
+```{r}
+# Mean of non-smoking mothered babies
+mean(filter(babies, smoke==0)$bwt)
+
+# Standard Deviation Function
+no_smoke = filter(babies, smoke==0)$bwt
+mysd=function(no_smoke){
+  sd(no_smoke)*sqrt((length(no_smoke)-1)/length(no_smoke))
+}
+# Standard deviation of non-smoking mothered babies
+mysd(no_smoke)
+
+# Lightest non-smoking mothered baby
+min(filter(babies, smoke==0)$bwt)
+
+# Heaviest non-smoking mothered baby
+max(filter(babies, smoke==0)$bwt)
+```
+
+**Bodyweight of smoking mothered babies:**
+```{r}
+# Mean of smoking mothered babies
+mean(filter(babies, smoke==1)$bwt)
+
+# Standard Deviation Function
+yes_smoke = filter(babies, smoke==1)$bwt
+mysd=function(yes_smoke){
+  sd(yes_smoke)*sqrt((length(yes_smoke)-1)/length(yes_smoke))
+}
+# Standard deviation of smoking mothered babies
+mysd(yes_smoke)
+
+# Lightest smoking mothered baby
+min(filter(babies, smoke==1)$bwt)
+
+# Heaviest smoking mothered baby
+max(filter(babies, smoke==1)$bwt)
+```
+
+##### 2. Use graphical methods to compare and two distributions of birth weight. That is, plot histograms and box plots for both groups. Make sure that the scaled are the same.
+
+```{r}
+ggplot(babies, aes(x = bwt, y=..density..))+
+  geom_histogram(data = filter(babies, smoke == 0), fill = "pink", alpha = 0.75, breaks = c(seq(50, 180, by = 5)))+
+  geom_histogram(data = filter(babies, smoke == 1), fill = "cyan", alpha = 0.5, breaks = c(seq(50, 180, by = 5)))+
+  labs(title = "Birthweights of Babies Born to Mothers Who Did Smoke and Did Not Smoke During Pregnancy", x = "Birthweight")
+```
+
+Pink represents the birthweights of the babies whose mothers did not smoke during pregnancy.
+Blue represents the birthweights of the babies whose mothers did smoke during pregnancy.
+
+##### 3. What do you conclude? Is maternal smoking harmful to fetal health (as measured by low birthweight)? Discuss what might be confounding factors here.
+
+Having measured baby birth weight, we can conclude that maternal smoking may be harmful to fetal health. We were able to come to this observation, through comparing the baby birth weights in two different groups: non-smoking mothers and smoking mothers. In the non-smoking mothers group, the mean baby weight was around 123 ounces, and the standard deviation was about 17. In the smoking mothers group the mean baby weight was 114 ounces, and the standard deviation was about 18. This suggests a 9 ounce difference in mean baby weight between each group, which is a 7.89% difference. Therefore, this shows that there is a potential correlation between the babies weight and the mother’s smoking habits: lower mean weight of the babies whose mothers smoke in comparison to higher mean weight of the babies whose mothers do not smoke.
+
+A confounding factor is any variable that could have influenced the outcome of the experiment but was not directly taken into account. Some confounding factors for this study could include the mothers socioeconomic factors, other health conditions of the baby which could impact the birth weight, genetic factors, and the mothers mental and physical health. 

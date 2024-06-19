@@ -1,0 +1,98 @@
+---
+title: 'Final Project Title '
+author: "Group Member Names"
+output:
+  pdf_document: default
+  word_document: default
+---
+
+```{r setup, include=FALSE}
+## you can edit this code chunk to change defaults for this file (ex: show all code, only show output, don't show warning etc)
+# update defaults with the gear icon on the right
+knitr::opts_chunk$set(
+	echo = FALSE,
+	message = FALSE,
+	warning = FALSE
+)
+```
+
+```{r}
+# make sure you add any packages you'll need in this file here (otherwise it won't knit)
+library(dplyr)
+library(ggplot2)
+```
+
+```{r}
+# read in the dataset you're using for your project here into a data frame 
+# with the same name(s) as the files. For example, if you're doing the NBA
+# project, you should have lines like:
+
+# covid=read.csv("~/PathNameForDataFolder/covid.csv") # OR
+# worldbank=read.csv("~/PathNameForDataFolder/worldbank.csv")
+
+# Make sure you replace the path names so that will work for you,
+# but make sure you name the datasets the same thing as the data files 
+# (except without .csv).  Also, when you group submits the .rmd file for
+# the project, make sure to comment out the read.csv() lines - we will
+# already have the data read in with those names, and obviously the
+# path names on our machines will be different anyway.
+
+# Keep in mind that the rmd file should knit for us with the only change being
+# to change the path name for the data. So everything should run without any 
+# other files or datasets. If you are using any other data you should input it
+# using c() or something like that. If you are wanting to use another big dataset
+# talk to Hank and if it seems like there's no other way to do it you can send the
+# dataset separately.
+```
+
+### Introduction
+
+Add text about your project here. Include:
+
+  * background: why do you care about the topic you're looking at
+  * variables: which variables are you looking at, how are they measured, etc
+  * hypothesis/study questions: what relationship are you looking at?
+  
+Basically introduce us to your dataset and the questions you're looking to explore in your project. 
+
+### Exploratory Data Analysis/ Description of Data
+
+In this section, you're looking at your data. You want to see how different variables are distributed (so you know if linear regression will make sense, for example) and might want to look at the relationships between two variables.
+
+A lot of this exploration will be done graphically, so include some plots about your data. Each person in the project is responsible for one plot, labeled with their name, and typically you'll do that here (although if your individual plot is fancy it could go in the data analysis part). Plots could be:
+
+  * Histograms (to look at the distribution of your data)
+  * Scatter plots  (to look at the correlation/direction of two variables)
+  
+Make sure you label your plots and explain your plots (which variables you've included, any inferences, issues like nonlinearity, etc). 
+
+```{r}
+# plot here
+## example:
+ggplot(iris, aes(x = Sepal.Length, y = ..density..)) +
+  geom_histogram(bins = 20) +
+  ggtitle("Histogram of Sepal Lengths in the Iris Dataset") +
+  xlab("Sepal Length") +
+  ylab("% per sepal length")
+```
+
+### Data Analysis
+
+This is the section for formal data analysis. This should be where you answer your main question(s) of interest. This section should include regression and a hypothesis test (possibly HT for slope of regression line). You might also include additional plots. 
+
+You should show:
+
+  * any math you do for your hypothesis tests (including formulas, p-values, etc)
+  * plots that explain what you see (if you're looking at correlations)
+
+### Conclusion
+
+Concluding remarks. Might include:
+
+  * restating your question of interest
+  * explain how your data analysis answers that question (might confirm or negate your alternative hypothesis or might support the null hypothesis)
+  * tie the whole project together
+  
+### References
+
+Include any articles/website you've referenced (if applicable)

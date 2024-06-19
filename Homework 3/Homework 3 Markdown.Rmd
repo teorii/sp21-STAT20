@@ -1,0 +1,176 @@
+---
+title: 'STAT20 Homework #3'
+author: "Seth Metcalf"
+output:
+  word_document: default
+  pdf_document: default
+toc: no
+---
+
+### Introduction
+
+This is Homework #3, which contains questions from Chapter 13 & 14.
+*Due 12 February 2020.*
+
+# Chapter 13
+### 1. Ch 13 B4: Five cards are dealt off the top of a well-shuffled deck.
+
+##### a) Find the chance that the 5th card is the queen of spades. (Hint: Imagine that you have a deck of cards and pull out the 5th card without looking at any other cards.)
+
+Since we are unaware of the card that is being pulled, we assume that the Queen of Spades has yet not been pulled. Since we are unaware of the value of the first 4 cards that have been pulled, it has no effect on whether the fifth card is the queen of spades or not. Therefore the value is just 1/52.
+```{r}
+(1/52)
+```
+
+##### b) Find the chance that the 5th card is the queen of spades, given that the first 4 cards are hearts.
+
+Since we now know the value of the first 4 cards, they now have an effect on the probability. Knowing that the first 4 cards are hearts, we can safely remove 4 hearts from the deck, raising the probability to 1/48 cards.
+```{r}
+(1/48)
+```
+
+### 2. Ch 13 C7: A fair coin is tossed 3 times.
+
+##### a) What is the chance of getting 3 heads?
+
+Since the chance of getting heads once is 1/2. The chance of getting it 3 times in a row out of 3 rolls is just 50% 3 times in a row. Therefore:
+```{r}
+((1/2) * (1/2) * (1/2))
+```
+
+##### b) What is the chance of not getting 3 heads?
+
+The chance of not getting 3 heads would mean every outcome other than getting 3 heads in a row. Since the probability of getting 3 heads is 1/8 or 0.125, the chance of not getting this to occur is 1 - P(3 heads) or 7/8.
+```{r}
+(1 - ((1/2) * (1/2) * (1/2)))
+```
+
+##### c) What is the chance of getting at least 1 tail?
+
+Getting at least 1 tail includes the chances of getting 1 tail, 2 tails, or 3 tails. Because a coin can either land heads or tails, it is the same probability of not rolling 3 heads.
+```{r}
+(1 - (1/8))
+```
+
+##### d) What is the chance of getting at least 1 head?
+
+Likewise, since a coin can either land heads or tails, the chance of at least 1 head implies that as long as all the rolls were not tails, at least 1 head appeared. Meaning that it is the same probability as at least getting 1 tail.
+```{r}
+(1 - (1/8))
+```
+
+### 3. Ch 13 D1:  For each of the following boxes, say whether color and number are dependent or independent.
+
+##### a)
+
+Since it seems as though both sides match each other have one 1 and two 2s, it can be argued that the color and number may be dependent on one another, but it might just be coincidence. Because of this, more data needs to be made before reaching a conclusive answer.
+
+##### b)
+
+Every color has one 1 and one 2, following an obvious pattern. Because of this it is obvious that the color and numbers are dependent.
+
+##### c)
+
+Since there does not seem to be any restrictions based off of the number or the color and there is no pattern between the two colors, it can be said that the color and number is probably independent from one another. 
+
+### 4. Ch 13 Rev 3: Four cards will be dealt off the top of a well-shuffled deck. There are two options: 
+
+##### (i) To win $1 if the first card is a club and the second is a diamond and the third is a heart and the fourth is a spade. (ii) To win $1 if the four cards are of four different suits. Which option is better? Or are they the same? Explain.
+
+While there are only 4 suits in a deck of cards. The biggest reason why (ii) is much more likely to occur is because it allows for all the permutations of pulling the 4 different suits. While you can win (i) with club, diamond, heart, and spade in that order, you can not win (i) with diamond, heart, spade, and club in that order, but that would be suitable to win with (ii). Which means that we know that option (ii) is more likely to occur. Specifically:
+```{r}
+factorial(4)
+```
+Since there are 24 different factorials to account for, compared to the 1 permutation that is allowed with (i), there is a 24x more likely chance for (ii) to occur.
+
+### 5. Ch 13 Review 9: A fair die is rolled 10 times. Find the chance of:
+
+##### a) getting 10 sixes.
+
+Since the chance of getting 10 sixes means rolling the probability of 1/6 10 times in a row, R can help us out here with its dbinom function:
+```{r}
+dbinom(x = 10, size = 10, prob = 1/6)
+```
+or a **0.000001654%**
+
+##### b) not getting 10 sixes.
+
+Since this is the complementary to getting 10 sixes, we can subtract the probability out of 1 and get our answer.
+```{r}
+1 - (dbinom(x = 10, size = 10, prob = 1/6))
+```
+Which is so close to the number 1 that R does not show the actual number, but it would be roughly 99.9999984%.
+
+##### c) all the rolls showing 5 spots or less.
+
+Since it is a 6 sided dice, the chance of it being a 5 or less is 5/6. This means that using the same dbinom function from before to calculate the 10 sixes in a row, we can switch the probability to 5/6 and get a much higher chance of this occurring due to the fact that 5/6 is much more likely than 1/6.
+```{r}
+dbinom(x = 10, size = 10, prob = 5/6)
+```
+Or a percentage of roughly 16.15%.
+
+# Chapter 14
+### 6. Ch 14 B1: Fifty children went to a party where cookies and ice cream were served: 12 children took cookies; 17 took ice cream. True or false: 29 children must have had cookies or ice cream. Explain briefly.
+
+False, it could have been possible that out of the 12 children that had cookies and 17 that had ice cream, there could have been a few that had both cookies and ice cream. Meaning 1 child could cause both counters to go up by 1.
+
+### 7. Ch 14 D4: A die is rolled 3 times. 
+
+##### a) What is the chance of getting at least one ace?
+
+Assuming that an ace is referring to getting a 1 on a die, there is a 1/6 of this occurring assuming that it is a fair 6 sided die because there would be six possible options 1, 2, 3, 4, 5, or 6.
+
+##### b)Same, but with 12 rolls.
+
+This becomes much more likely as it is getting a 1/6 chance out of 12 rolls. The probability can be once again given to us by dbinom in R, we can use the complement to getting no aces on 12 rolls to find getting at least 1 by subtracting the complement from 1.
+```{r}
+(1 - dbinom(x = 12, size = 12, prob = 5/6))
+```
+### 8. Ch 14 Rev 9: One ticket will be drawn at random from each of the two boxes shown below:
+
+##### a) The number drawn from A is larger than the one from B.
+
+Since the average of box A is 2 mean(1, 2, 3) and the average of Box B is 2.5 mean(1, 2, 3, 4), if you were to pull randomly from either box, it would be more likely that the number from B is higher than the one from A. As a probability value, this would result in a 6/12 chance that the pull from Box B is larger than Box A.
+
+##### b) The number drawn from A equals the one from B.
+
+Since there are 3 cards in A and 4 cards in B, there is only a possibility of matching 1 to 1, 2 to 2, or 3 to 3 meaning that there are 3 possible times which could occur which is a 3/12 chance.
+
+##### c) The number drawn from A is smaller than the one from B.
+
+Since the average of box A is 2 mean(1, 2, 3) and the average of Box B is 2.5 mean(1, 2, 3, 4), if you were to pull randomly from either box, it would be more likely that the number from A is lower than the one from B.As a probability value, this would result in a 3/12 chance that the pull from Box B is larger than Box A.
+
+### 9. Ch 14 Rev 11: Three cards are dealt from a well-shuffled deck.
+
+##### 1. Find the chance that all of the cards are diamonds.
+
+If all three cards are diamonds, then that means that the pool of diamonds also decreases as every pool goes on. Therefore, which the initial prob is 13/52 as you pull a heart, it becomes 12/51, and etc.
+```{r}
+((13/52) * (12/51) * (11/50))
+```
+
+##### 2. Find the chance that none of the cards are diamonds.
+
+Since the chances of not getting a diamond is also decreasing with every pull, it has a much larger chance as there are 39 cards in the deck from the start that are not diamond.
+```{r}
+((39/52) * (38/51) * (37/50))
+```
+
+##### 3. Find the chance that the cards are not all diamonds
+
+Since this is getting at least one diamond, we can use the complement to getting all the cards as diamonds since if we do not get every card NOT a diamond, then there has to be at least 1 that is a diamond.
+```{r}
+1 - ((39/52) * (38/51) * (37/50))
+```
+
+
+### 10. Write code to simulate the answer to Ch 13 B4 part b) based on 100,000 replications. 
+
+```{r}
+# Chances of pulling the Queen of Spades in Ch 13 B4 part b) is 1/48
+# Creating a Vector of 47 FALSE's (0) and 1 TRUE (1).
+probQueen = rep(c(0, 1), c(47, 1))
+
+# Sampling from this Vector
+mean(sample(probQueen, 100000, replace = TRUE))
+```

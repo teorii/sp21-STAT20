@@ -1,0 +1,199 @@
+---
+title: 'STAT20 Homework #3'
+author: "Seth Metcalf"
+output:
+  word_document: default
+  pdf_document: default
+toc: no
+---
+
+### Introduction
+
+This is Homework #4, which contains questions from Chapter 14, 15, & 16.
+*Due 19 February 2020.*
+
+# Chapter 14
+### 1. Based on Ch 14 C4: 
+The unconditional probability of event A is 1/2. The unconditional probability of event B is 1/3. Say whether each of the following is true or false, and explain briefly. If false, find the correct chance if possible.
+##### a) The chance that A and B both happen must be 1/2 x 1/3 = 1/6. 
+
+False, while the unconditional probability is given to us, we have no idea if A and B are independent of one another; since we don't know, we can not say for certain that 1/2 * 1/3 = 1/6.
+
+##### b) If A and B are independent, the chance that they both happen must be 1/2 X 1/3 = 1/6.
+
+True, since they are independent of one another we know that the probabilities will not be affected if either one goes off, so it is correct to assume that this is the probability.
+
+##### c) If A and B are mutually exclusive, the chance that they both happen must be 1/2 x 1/3 = 1/6.
+
+False. Mutual exclusivity does not imply independence, because of this the statement can not be assumed true.
+
+##### d) The chance that at least one of A or B happens must be 1/2 + 1/3 = 5/6.
+
+False. In this case, in order to do this, mutual exclusivity needs to be established. Since it hasn't, then this equation is not necessarily true.
+
+##### e) If A and B are independent, the chance that at least one of them happens must be 1/2 + 1/3 = 5/6.
+
+False. Since it is possible that the events occur at the same time, we can not just add the two probabilities together. We can only do so if they are mutually exclusive.
+
+##### f) If A and B are mutually exclusive, the chance that at least one of them happens must be 1/2 + 1/3 = 5/6.
+
+True. Since the events are mutually exclusive and since they can not occur at the same time, simply adding their probabilities together is the correct representation of (A or B).
+
+
+### 2. Ch 15 A3: 
+A box contains one red ball and five green ones. Four draws are made at random with replacement from the box. Find the chance that:
+##### a) a red ball is never drawn
+
+Since it is with replacement, we can continue to divide all the probabilities by the total number of balls in the box. Since the probability to not draw a red ball is 5/6, this just needs to occur 4 times in a row.
+```{r}
+(5/6)^4
+```
+Resulting in a roughly 48.22% chance.
+
+##### b) a red ball appears exactly once
+
+Likewise, continuing without replacement, we need the 5/6 probability (not drawing the red ball) to occur 3 times and we need to draw the red ball 1 time (1/6 probability). Since this can occur in 4 different variations (RGGG, GRGG, GGRG, GGGR), multiply by 4.
+```{r}
+4 * (1/6) * (5/6)^3
+```
+Resulting in a roughly 38.58% chance.
+
+##### c) a red ball appears exactly twice
+
+Continuing without replacement, we need the 5/6 probability (not drawing the red ball) to occur 2 times and we need to draw the red ball 2 times (1/6 probability). Since this can occur in 6 different variations (RRGG, RGRG, RGGR, GGRR, GRGR, GRRG) we multiply by 6.
+```{r}
+6 * (1/6)^2 * (5/6)^2
+```
+Resulting in a roughly 11.57% chance.
+
+##### d) a red ball appears exactly three times
+
+Continuing without replacement, we need the 5/6 probability (not drawing the red ball) to occur 1 time and we need to draw the red ball 3 times (1/6 probability). Since this can occur in 4 variations (RRRG, RRGR, RGRR, GRRR) we multiply by 4.
+```{r}
+4 * (1/6)^3 * (5/6)
+```
+Resulting in a roughly 1.54% chance.
+
+##### e) a red ball appears on all the draws
+
+Continuing without replacement, we need to draw the red ball 4 times (1/6 probability).
+```{r}
+(1/6)^4
+```
+Resulting in a roughly 0.08% chance.
+
+##### f) a red ball appears at least twice
+
+With probabilities that appear "at least" amount of times, we have to find the probability that it can occur 2 times or occur 3 times or occur N times. Since we are only doing 4 draws, we only need to find the probability that it occurs 2, 3, or 4 times.
+```{r}
+((6 * (1/6)^2 * (5/6)^2) + (4 * (1/6)^3 * (5/6)) + ((1/6)^4))
+```
+Resulting in a roughly 13.19% chance.
+
+
+
+# Chapter 15
+### 3. Based on Ch 15 Rev 4: 
+A box has 8 red marbles and 3 green. Six draws are made at random with replacement. Find the chance that three green marbles are drawn.
+
+Similar to how the previous problems were done. The probability of 8/11 (drawing a red marble) needs to occur 3 times and the probability of 3/11 (drawing a green marble) occurs 3 times as well. Since this can occur 20 times (n!/(k!(n-k)!) = 6!/(3!(3!)) = (4 * 5 * 6)/6 = 20), we multiply by 20.
+```{r}
+20 * (8/11)^3 * (3/11)^3
+```
+Resulting in a roughly 15.6% chance.
+
+
+### 4. Ch 15 Rev 8: 
+A coin will be tossed 10 times. Find the chance that there will be exactly 2 heads in the first 5 tosses, and exactly 4 heads in the last 5 tosses.
+
+Since this is an (A and B) and they are independent of one another, we can just multiply them. We need the occurrence of two heads to occur in the first 5 rolls and multiply that with the probability that 4 heads occurs in the last 5 tosses.
+```{r}
+(dbinom(x = 2, size = 5, prob = 1/2)) * (dbinom(x = 4, size = 5, prob = 1/2))
+```
+Resulting in a roughly 4.88% chance.
+
+
+### 5. For Ch 15 Rev 4 and Ch 15 Rev 8
+Solve in R in two ways: 1) using the choose() function and binomial formula, and 2) using the dbinom() function (see code from 2/11).
+
+Ch 15 Rev 4
+```{r}
+# Choose function, prob of event occurring to the power of number of occurrences, prob of event not occurring  to the power of occurrences.
+choose(6, 3) * (3/11)^(3) * (8/11)^(3)
+# dbinom function
+dbinom(x = 3, size = 6, prob = 3/11)
+```
+Ch 15 Rev 8
+```{r}
+# Choose function, prob of event occurring to the power of number of occurrences, prob of event not occurring  to the power of occurrences. Multiply this by the exact same thing of the other occurring.
+(choose(5, 2) * (1/2)^(2) * (1/2)^(3)) * (choose(5, 4) * (1/2)^(4) * (1/2)^(1))
+# dbinom function
+(dbinom(x = 2, size = 5, prob = 1/2)) * (dbinom(x = 4, size = 5, prob = 1/2))
+```
+
+
+
+# Chapter 16
+### 6. Ch 16 A4:  
+##### a) A coin is tossed, and you win a dollar if there are more than 60% heads. Which is better: 10 tosses or 100? Explain.  
+
+10 tosses is much better. In order to win, you only need to be off by 1 or 2 occurrences, which is very likely for 10 tosses while for 100 you need to be off by 10+, which is much less likely to happy.
+
+##### b) As in (a), but you win the dollar if there are more than 40% heads.
+
+Since it is a fair coin, it is likely -- over time -- to be closer to 50%. The more that you do something, the closer it will be to the probability, maximizing the amount of tosses would be optimal; therefore flipping a coin 100 times would help more.
+
+##### c) As in (a), but you win the dollar if there are between 40% and 60% heads. 
+
+Same idea, the more that a coin is flipped, the more likely it is to get closer to the probability (50%) so maximizing your amount of tosses would result in a more likely chance to be between 40% and 60%. This means that 100 tosses is better in this scenario.
+
+##### d) As in (a), but you win the dollar if there are exactly 50% heads.
+
+Even though that you get more likely to get closer to 50% probability in the long run with more tosses, it is actually more and more unlikely to be EXACTLY 50% probability in the long run. In this scenario, it is actually better to go with the one with fewer tosses, so 10 is the right answer.
+
+
+### 7. Ch 16 B2: 
+One hundred draws are made at random with replacement from the box: 
+##### a) How small can the sum be? How large? 
+
+Technically it is possible that every single draw is the minimum number and it is possible that every single draw is the maximum number. Therefore the sum can be anywhere between 100 and 200 as 1 and 2 are the only options in the box.
+
+##### b) How many times do you expect the ticket marked 1 to tum up? The ticket 2? 
+
+Assuming that the box is not biased, it would be a fair assumption to assume that every ticket has an equal chance of being pulled so 1 would occur 50% of the time and 2 would occur the other 50% of the time.
+
+##### c) About how much do you expect the sum to be? 
+
+We can take the expected value of this box. EV = #draws * avg. of the box = 100 draws * (1+2)/2 = 100 * 1.5 = 150. I would expect the box sum to be 150 assuming either ticket has a 50% chance of being pulled.
+
+
+### 8. Ch 16 Rev 4:  
+##### a) A die will be rolled some number of times, and you win $1 if it shows one more than 20% of the time. Which is better: 60 rolls, or 600 rolls? Explain.  
+
+60 rolls is better. Same as the argument as before, even though 600 rolls will tend to have a larger deviation in terms of absolute value (# away from the expected prob), 60 rolls will tend to have a larger deviation in terms of percentage (% away from the expected prob).
+
+##### b) As in (a), but you win the dollar if the percentage of aces is more than 15%. 
+
+This one becomes more difficult to decide. Since the actual probability of rolling a 1 is 1/6 (16.6667%), it is hard to tell how much this will deviate in the run of 600 rolls. But, it would be safer to assume that a 1 is rolled closer to average (16.6667%) over more rolls, which is higher than 15%.
+
+##### c) As in (a), but you win the dollar if the percentage of aces is between 15% and 20%. 
+
+Because you want the probability to fall within a finite region -- and this finite region contains the actual probability, it is safer to go with the larger number of rolls as this lowers the deviations in terms of % away from probability. So 600 rolls is the better option.
+
+##### d) As in (a), but you win the dollar if the percentage of aces is exactly 16 2/3% 
+
+As stated before, even though over long periods of time are likelier to be close to the probability, it is more and more unlikely to be EXACTLY the probability; so against what many would think, the lower number of rolls is the better option. 60 Rolls is the right choice.
+ 
+ 
+### 9. Ch 16 Rev 9: 
+A box contains red and blue marbles; there are more red marbles than blue ones. Marbles are drawn one at a time from the box, at random with replacement. You win a dollar if a red marble is drawn more often than a blue one. There are two choices, then choose one of the four options i-iv) and explain: (A) 100 draws are made from the box. (B) 200 draws are made from the box. 
+
+##### (i) A gives a better chance of winning. 
+
+##### (ii) B gives a better chance of winning. 
+
+##### (iii) A and B give the same chance of winning. 
+
+##### (iv) Can't tell without more information.
+
+Overall it seems that it is hard to tell without more information. If the difference between red and blue marbles in the box is 1% (red is 51%, blue is 49%) then it would be better off to go with the lower number of rolls (100 rolls) because of it is more likely to get a larger discrepancy in percent with lower number of rolls. If the percentages are further apart (red is 60%, blue is 40%), then more rolls would lead to a more likely outcome that red is drawn more due to the nature that over a long period of time (large number of rolls) the probabilities are likelier to be clsoer to the probability.
